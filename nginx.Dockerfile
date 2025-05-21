@@ -30,8 +30,8 @@ RUN chown -R 1001:1001 /opt/bitnami/nginx/conf
 
 RUN mkdir -p /var/www/html && \
     mkdir -p /var/www/html/wp-content && \
-    chown -R 1001:1001 /var/www/html && \
-    chmod -R 777 /var/www/html/wp-content
+    --chown=1001:1001 -R 777 /var/www/html && \
+    --chmod=1001:1001 -R 777 /var/www/html/wp-content
 
 COPY ./nginx/wordpress-fpm.conf /opt/bitnami/nginx/conf/server_blocks/
 
