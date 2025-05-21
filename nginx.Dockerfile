@@ -2,11 +2,6 @@ FROM bitnami/nginx:latest
 
 USER root
 
-# links the nginx users to wordpress
-RUN usermod -u 1001 www-data && \
-    groupmod -g 1001 www-data && \
-    chown -R www-data:www-data /var/www/html
-
 # Configure logs directory
 RUN mkdir -p /tmp/nginx-logs && \
     touch /tmp/nginx-logs/access.log /tmp/nginx-logs/error.log && \
@@ -23,34 +18,46 @@ COPY ./nginx/my_stream_server_block.conf /opt/bitnami/nginx/conf/server_blocks/
 COPY ./nginx/wordpress-fpm.conf /opt/bitnami/nginx/conf/server_blocks/
 RUN sed -i 's|/var/log/nginx|/tmp/nginx-logs|g' /opt/bitnami/nginx/conf/server_blocks/*.conf
 
-# Configure WordPress directory
-RUN chown -R 1001:1001 /var/www/html && \
+# create & Configure WordPress directory
+RUN mkdir -p /var/www/html && \
+    usermod -u 1001 www-data && \
+    groupmod -g 1001 www-data && \
+    chown -R www-data:www-data /var/www/html && \
+    chown -R 1001:1001 /var/www/html && \
     chmod -R 777 /var/www/html && \
-    find /var/www/html -type d -exec chmod 775 {} \; && \
+    find /var/www/html -type d -exec chmod 777 {} \; && \
     find /var/www/html -type f -exec chmod 777 {} \;
 
 # https://docs.bitnami.com/google/apps/wordpress-pro/administration/understand-file-permissions/
 # gives the correct permissions to each directory
-RUN     chown -R 1001:1001 /var/www/html/wp-content && \
+RUN     mkdir -p /var/www/html/wp-content && \
+        chown -R 1001:1001 /var/www/html/wp-content && \
         find /var/www/html/wp-content -type d -exec chmod 777 {} \; && \
         find /var/www/html/wp-content -type f -exec chmod 777 {} \; && \
         chmod 777 /var/www/html/wp-content && \
-
+        #
+        mkdir -p /var/www/html/wp-content/themes && \
         chown -R 1001:1001 /var/www/html/wp-content/themes && \
         find /var/www/html/wp-content/themes -type d -exec chmod 777 {} \; && \
         find /var/www/html/wp-content/themes -type f -exec chmod 777 {} \; && \
         chmod 777 /var/www/html/wp-content/themes && \
-
+        #
+        mkdir -p /var/www/html/wp-content/cache && \
         chown -R 1001:1001 /var/www/html/wp-content/cache && \
         find /var/www/html/wp-content/cache  -type d -exec chmod 775 {} \; && \
         find /var/www/html/wp-content/cache  -type f -exec chmod 664 {} \; && \
         chmod 777 /var/www/html/wp-content/cache && \
+        #
         mkdir -p /var/www/html/wp-content/uploads && \
-
         chown -R 1001:1001 /var/www/html/wp-content/uploads && \
         find /var/www/html/wp-content/uploads  -type d -exec chmod 777 {} \; && \
         find /var/www/html/wp-content/uploads -type f -exec chmod 777 {} \; && \
-        chmod 777 /var/www/html/wp-content/uploads
+        chmod 777 /var/www/html/wp-content/uploads && \
+        #
+        chown -R www-data:www-data /var/www/html/wp-content && \
+        chown -R www-data:www-data /var/www/html/wp-content/themes && \
+        chown -R www-data:www-data /var/www/html/wp-content/cache && \
+        chown -R www-data:www-data /var/www/html/wp-content/uploads 
 
 EXPOSE 80 443
 
