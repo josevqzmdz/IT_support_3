@@ -15,8 +15,9 @@ RUN { \
     echo 'pm.status_path = /status'; \
 } > /usr/local/etc/php-fpm.d/zz-custom.conf
 
+
 RUN mkdir -p /var/www/html/wp-content/uploads && \
-    chmod -R 0777 /var/www/html/wp-content/uploads
+    chmod -R 0775 /var/www/html/wp-content/uploads
 
 COPY --chown=www-data:www-data ./other_files/wp1-entrypoint.sh /usr/local/bin/wp-entrypoint.sh
 RUN chmod +x /usr/local/bin/wp-entrypoint.sh

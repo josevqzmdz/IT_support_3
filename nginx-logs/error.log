@@ -1,0 +1,162 @@
+2025/05/20 03:27:55 [notice] 1#1: using the "epoll" event method
+2025/05/20 03:27:55 [notice] 1#1: nginx/1.27.5
+2025/05/20 03:27:55 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2025/05/20 03:27:55 [notice] 1#1: OS: Linux 6.1.0-35-amd64
+2025/05/20 03:27:55 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/05/20 03:27:55 [notice] 1#1: start worker processes
+2025/05/20 03:27:55 [notice] 1#1: start worker process 11
+2025/05/20 03:27:55 [notice] 1#1: start worker process 12
+2025/05/20 03:27:55 [notice] 1#1: start worker process 13
+2025/05/20 03:27:55 [notice] 1#1: start worker process 14
+2025/05/20 03:27:55 [notice] 1#1: start worker process 15
+2025/05/20 03:27:55 [notice] 1#1: start worker process 16
+2025/05/20 03:27:55 [notice] 1#1: start worker process 17
+2025/05/20 03:27:55 [notice] 1#1: start worker process 18
+2025/05/20 03:27:55 [notice] 1#1: start worker process 19
+2025/05/20 03:27:55 [notice] 1#1: start worker process 20
+2025/05/20 03:27:55 [notice] 1#1: start worker process 21
+2025/05/20 03:27:55 [notice] 1#1: start worker process 22
+2025/05/20 03:28:31 [error] 11#11: *1 directory index of "/var/www/html/" is forbidden, client: 172.18.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8080"
+2025/05/20 03:28:38 [error] 12#12: *2 directory index of "/var/www/html/" is forbidden, client: 172.18.0.1, server: localhost, request: "GET / HTTP/1.1", host: "127.0.0.1:8080"
+2025/05/20 03:59:05 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2025/05/20 03:59:05 [notice] 16#16: gracefully shutting down
+2025/05/20 03:59:05 [notice] 14#14: gracefully shutting down
+2025/05/20 03:59:05 [notice] 16#16: exiting
+2025/05/20 03:59:05 [notice] 14#14: exiting
+2025/05/20 03:59:05 [notice] 16#16: exit
+2025/05/20 03:59:05 [notice] 14#14: exit
+2025/05/20 03:59:05 [notice] 19#19: gracefully shutting down
+2025/05/20 03:59:05 [notice] 19#19: exiting
+2025/05/20 03:59:05 [notice] 19#19: exit
+2025/05/20 03:59:05 [notice] 13#13: gracefully shutting down
+2025/05/20 03:59:05 [notice] 13#13: exiting
+2025/05/20 03:59:05 [notice] 13#13: exit
+2025/05/20 03:59:05 [notice] 17#17: gracefully shutting down
+2025/05/20 03:59:05 [notice] 17#17: exiting
+2025/05/20 03:59:05 [notice] 17#17: exit
+2025/05/20 03:59:05 [notice] 22#22: gracefully shutting down
+2025/05/20 03:59:05 [notice] 22#22: exiting
+2025/05/20 03:59:05 [notice] 22#22: exit
+2025/05/20 03:59:05 [notice] 21#21: gracefully shutting down
+2025/05/20 03:59:05 [notice] 21#21: exiting
+2025/05/20 03:59:05 [notice] 21#21: exit
+2025/05/20 03:59:05 [notice] 11#11: gracefully shutting down
+2025/05/20 03:59:05 [notice] 11#11: exiting
+2025/05/20 03:59:05 [notice] 11#11: exit
+2025/05/20 03:59:05 [notice] 15#15: gracefully shutting down
+2025/05/20 03:59:05 [notice] 15#15: exiting
+2025/05/20 03:59:05 [notice] 15#15: exit
+2025/05/20 03:59:05 [notice] 18#18: gracefully shutting down
+2025/05/20 03:59:05 [notice] 18#18: exiting
+2025/05/20 03:59:05 [notice] 18#18: exit
+2025/05/20 03:59:05 [notice] 20#20: gracefully shutting down
+2025/05/20 03:59:05 [notice] 20#20: exiting
+2025/05/20 03:59:05 [notice] 20#20: exit
+2025/05/20 03:59:05 [notice] 12#12: gracefully shutting down
+2025/05/20 03:59:05 [notice] 12#12: exiting
+2025/05/20 03:59:05 [notice] 12#12: exit
+2025/05/20 03:59:05 [notice] 1#1: signal 17 (SIGCHLD) received from 18
+2025/05/20 03:59:05 [notice] 1#1: worker process 18 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/20 03:59:05 [notice] 1#1: signal 17 (SIGCHLD) received from 16
+2025/05/20 03:59:05 [notice] 1#1: worker process 12 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: worker process 16 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/20 03:59:05 [notice] 1#1: signal 17 (SIGCHLD) received from 12
+2025/05/20 03:59:05 [notice] 1#1: worker process 13 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: worker process 15 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: worker process 22 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/20 03:59:05 [notice] 1#1: signal 17 (SIGCHLD) received from 19
+2025/05/20 03:59:05 [notice] 1#1: worker process 17 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: worker process 19 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: worker process 21 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/20 03:59:05 [notice] 1#1: signal 17 (SIGCHLD) received from 17
+2025/05/20 03:59:05 [notice] 1#1: signal 17 (SIGCHLD) received from 20
+2025/05/20 03:59:05 [notice] 1#1: worker process 20 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: worker process 11 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: signal 17 (SIGCHLD) received from 11
+2025/05/20 03:59:05 [notice] 1#1: worker process 14 exited with code 0
+2025/05/20 03:59:05 [notice] 1#1: exit
+2025/05/20 03:59:09 [notice] 1#1: using the "epoll" event method
+2025/05/20 03:59:09 [notice] 1#1: nginx/1.27.5
+2025/05/20 03:59:09 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2025/05/20 03:59:09 [notice] 1#1: OS: Linux 6.1.0-35-amd64
+2025/05/20 03:59:09 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/05/20 03:59:09 [notice] 1#1: start worker processes
+2025/05/20 03:59:09 [notice] 1#1: start worker process 11
+2025/05/20 03:59:09 [notice] 1#1: start worker process 12
+2025/05/20 03:59:09 [notice] 1#1: start worker process 13
+2025/05/20 03:59:09 [notice] 1#1: start worker process 14
+2025/05/20 03:59:09 [notice] 1#1: start worker process 15
+2025/05/20 03:59:09 [notice] 1#1: start worker process 16
+2025/05/20 03:59:09 [notice] 1#1: start worker process 17
+2025/05/20 03:59:09 [notice] 1#1: start worker process 18
+2025/05/20 03:59:09 [notice] 1#1: start worker process 19
+2025/05/20 03:59:09 [notice] 1#1: start worker process 20
+2025/05/20 03:59:09 [notice] 1#1: start worker process 21
+2025/05/20 03:59:09 [notice] 1#1: start worker process 22
+2025/05/20 03:59:56 [error] 11#11: *1 connect() failed (113: No route to host) while connecting to upstream, client: 172.18.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://172.18.0.50:9000", host: "localhost:8080"
+2025/05/20 04:00:03 [error] 12#12: *3 connect() failed (113: No route to host) while connecting to upstream, client: 172.18.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://172.18.0.50:9000", host: "localhost:8080"
+2025/05/20 04:02:42 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2025/05/20 04:02:42 [notice] 11#11: gracefully shutting down
+2025/05/20 04:02:42 [notice] 12#12: gracefully shutting down
+2025/05/20 04:02:42 [notice] 13#13: gracefully shutting down
+2025/05/20 04:02:42 [notice] 11#11: exiting
+2025/05/20 04:02:42 [notice] 12#12: exiting
+2025/05/20 04:02:42 [notice] 16#16: gracefully shutting down
+2025/05/20 04:02:42 [notice] 18#18: gracefully shutting down
+2025/05/20 04:02:42 [notice] 13#13: exiting
+2025/05/20 04:02:42 [notice] 20#20: gracefully shutting down
+2025/05/20 04:02:42 [notice] 21#21: gracefully shutting down
+2025/05/20 04:02:42 [notice] 16#16: exiting
+2025/05/20 04:02:42 [notice] 18#18: exiting
+2025/05/20 04:02:42 [notice] 22#22: gracefully shutting down
+2025/05/20 04:02:42 [notice] 20#20: exiting
+2025/05/20 04:02:42 [notice] 21#21: exiting
+2025/05/20 04:02:42 [notice] 11#11: exit
+2025/05/20 04:02:42 [notice] 12#12: exit
+2025/05/20 04:02:42 [notice] 22#22: exiting
+2025/05/20 04:02:42 [notice] 13#13: exit
+2025/05/20 04:02:42 [notice] 16#16: exit
+2025/05/20 04:02:42 [notice] 18#18: exit
+2025/05/20 04:02:42 [notice] 20#20: exit
+2025/05/20 04:02:42 [notice] 17#17: gracefully shutting down
+2025/05/20 04:02:42 [notice] 21#21: exit
+2025/05/20 04:02:42 [notice] 22#22: exit
+2025/05/20 04:02:42 [notice] 17#17: exiting
+2025/05/20 04:02:42 [notice] 17#17: exit
+2025/05/20 04:02:42 [notice] 19#19: gracefully shutting down
+2025/05/20 04:02:42 [notice] 19#19: exiting
+2025/05/20 04:02:42 [notice] 15#15: gracefully shutting down
+2025/05/20 04:02:42 [notice] 15#15: exiting
+2025/05/20 04:02:42 [notice] 19#19: exit
+2025/05/20 04:02:42 [notice] 15#15: exit
+2025/05/20 04:02:42 [notice] 14#14: gracefully shutting down
+2025/05/20 04:02:42 [notice] 14#14: exiting
+2025/05/20 04:02:42 [notice] 14#14: exit
+2025/05/20 04:02:43 [notice] 1#1: signal 17 (SIGCHLD) received from 11
+2025/05/20 04:02:43 [notice] 1#1: worker process 11 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/20 04:02:43 [notice] 1#1: signal 17 (SIGCHLD) received from 18
+2025/05/20 04:02:43 [notice] 1#1: worker process 13 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: worker process 18 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: worker process 19 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: worker process 20 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/20 04:02:43 [notice] 1#1: signal 17 (SIGCHLD) received from 20
+2025/05/20 04:02:43 [notice] 1#1: signal 17 (SIGCHLD) received from 21
+2025/05/20 04:02:43 [notice] 1#1: worker process 12 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: worker process 15 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: worker process 21 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: worker process 22 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/20 04:02:43 [notice] 1#1: signal 17 (SIGCHLD) received from 22
+2025/05/20 04:02:43 [notice] 1#1: signal 17 (SIGCHLD) received from 17
+2025/05/20 04:02:43 [notice] 1#1: worker process 14 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: worker process 17 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: signal 29 (SIGIO) received
+2025/05/20 04:02:43 [notice] 1#1: signal 17 (SIGCHLD) received from 16
+2025/05/20 04:02:43 [notice] 1#1: worker process 16 exited with code 0
+2025/05/20 04:02:43 [notice] 1#1: exit
