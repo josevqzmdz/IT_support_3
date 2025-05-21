@@ -50,3 +50,6 @@ In order to tell phpmyadmin which file we want to protect, we can use a straight
 <Files "index.html">
   Require valid-user
 </Files>
+
+Now, in case the hacker can bypass all of the aforementioned and still get to the admin page, how can we kick him once he fails 3 times to log in? We are going to use fail2ban, a firewall library for linux, which will be configured in the docker host.
+

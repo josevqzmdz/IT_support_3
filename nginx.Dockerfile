@@ -45,8 +45,8 @@ find /var/www/html -type f -exec chmod 664 {} \;\n\
 chmod -R 775 /var/www/html/wp-content\n\
 chown -R 1001:1001 /var/www/html/wp-content\n\
 # Execute original entrypoint\n\
-exec /opt/bitnami/scripts/nginx/entrypoint.sh "$@"' > ./nginx/docker-entrypoint.sh && \
-    chmod +x ./nginx/docker-entrypoint.sh
+exec /opt/bitnami/scripts/nginx/entrypoint.sh "$@"' > /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
 
 EXPOSE 8080 443 80
 
