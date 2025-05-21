@@ -9,7 +9,7 @@ RUN mkdir -p /tmp/nginx-logs && \
     mkdir -p /tmp/nginx-logs && \
     touch /tmp/nginx-logs/access.log /tmp/nginx-logs/error.log /tmp/nginx-logs/nginx.pid && \
     chown -R 1001:1001 /tmp/nginx-logs && \
-    chmod -R 777 /tmp/nginx-logs
+    chmod -R 0777 /tmp/nginx-logs
 
 RUN sed -i 's|/var/log/nginx|/tmp/nginx-logs|g' /opt/bitnami/nginx/conf/nginx.conf
 
@@ -30,8 +30,9 @@ RUN chown -R 1001:1001 /opt/bitnami/nginx/conf
 
 RUN mkdir -p /var/www/html && \
     mkdir -p /var/www/html/wp-content && \
-    --chown=1001:1001 -R 777 /var/www/html && \
-    --chmod=1001:1001 -R 777 /var/www/html/wp-content
+    chown -R 1001:1001 777 /var/www/html && \
+    chmod -R 0777 /var/www/html && \
+    chmod -R 0777 /var/www/html/wp-content
 
 COPY ./nginx/wordpress-fpm.conf /opt/bitnami/nginx/conf/server_blocks/
 
