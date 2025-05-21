@@ -29,4 +29,5 @@ if [ ! -f "/etc/nginx/certs/server.crt" ]; then
 fi
 
 echo "Starting Nginx..."
-exec "$@"
+chown -R 1001:1001 /var/www/html
+exec /opt/bitnami/scripts/nginx/entrypoint.sh "$@"
