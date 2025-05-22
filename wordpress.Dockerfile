@@ -2,6 +2,8 @@ FROM bitnami/wordpress-nginx:latest
 
 USER root
 
+RUN mkdir -p /opt/bitnami/php/etc/php-fpm.d
+
 RUN { \
     echo '[www]'; \
     echo 'listen = 9000'; \
@@ -13,7 +15,7 @@ RUN { \
     echo 'pm.max_spare_servers = 8'; \
     echo 'clear_env = no'; \
     echo 'pm.status_path = /status'; \
-} > /usr/local/etc/php-fpm.d/zz-custom.conf
+} > /opt/bitnami/php/etc/php-fpm.d/zz-custom.conf
 
 
 # create & Configure WordPress directory
