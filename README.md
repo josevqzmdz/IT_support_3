@@ -7,19 +7,28 @@ phone: +523541090470
 
 Anyways, with that out of the way, the assesment requires me to write a README explaining:
 
-a) A misconfiguration that can be exploited
-b) How to run the service
+a) How to run the service
+b) A misconfiguration
 c) What security controls I implemented
 d) What is the "vulnerability" and how to fix it
 
 So, lets dive in!
 
-a) A misconfiguration: the phpmyadmin portal being openly reachable
+a) how to run the service:
+
+You need:
+a.- docker: I ran this thing on debian, so a lot of the configs here might need further tinkering if you're trying to run it through another linux distro, windows or mac.
+b.- firewalld or some sort of virtual firewall so the rules make sense
+c.- python3, pip and psutil
+d.- your own SSL certificates in case the ones provided in the /cert/ folder dont work.
+e.- at least 2gbs of space for the entire project after its done compiling
+
+1.- A misconfiguration: the phpmyadmin portal being openly reachable
 
 Lets assume for a moment that the docker image is mounted on an actual web server of some sort and available to the internet for anyone to reach. There are several issues with this:
 
-1.- You shouldn't be able to reach this in first place, unless you're the admin
-2.- The database and API is exposed to SQL injections
+a.- You shouldn't be able to reach this in first place, unless you're the admin
+b.- The database and API is exposed to SQL injections
 
 We can easily create a .htaccess file in the phpmyadmin folder and only allow the desired IP addresses to reach it.
 
@@ -50,12 +59,17 @@ In order to tell phpmyadmin which file we want to protect, we can use a straight
   Require valid-user
 </Files>
 
+
+2.- sql injections:
+
 Now, in case the hacker can bypass all of the aforementioned and still get to the admin page, how can we avoid SQL injections so he can only, in the worst case scenario,
-see the admin page but not be able to get anything out of the database? Well, the root of all sql injections is that they rely on mishandling the input when  creating an SQL statement, we have created a safe way to pass any "raw" queries into the database.
+see the admin page but not be able to get anything out of the database? Well, the root of all sql injections is that they rely on mishandling the input when  creating an SQL statement, we have created a safe way to pass any "raw" queries into the database. Its as simple as logging into the mysql bash and running this thing:
+
+ENCODED=$(echo $1 | base64); echo "SELECT * FROM T WHERE V=FROM_BASE64('$ENCODED');" | mysql
 
 In reality, we rarely if ever interact directly with the actual database. With PHP for instance we use PDOs, which encapsulate the query so it cannot be modified or overseen in any way.
 
-b) 777 and read-write permissions in a "rootless" environment
+3.-  777 and read-write permissions in a "rootless" environment
 
 Out of lack of time and to meet a deadline, I was forced to install sudo in the rootless nginx, use root as user and write all directories and files with either 777 or full read/write permissions. This is obviously bad practice, and in production you create users and usergroups with their own corresponding permissions. If I had more time, I would go back and rewrite the code so it doesn't require this. 
 
