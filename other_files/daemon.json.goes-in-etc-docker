@@ -1,4 +1,7 @@
 {
+    "iptables": true,
+    "bridge": "docker0",
+
     "builder": {
         "gc": {
             "defaultKeepStorage": "20GB",

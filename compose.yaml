@@ -18,6 +18,7 @@ services:
       - ./nginx:/opt/bitnami/nginx/conf/server_blocks:rw 
       - ./nginx:/etc/nginx/conf.d:rw 
       - ./nginx-logs:/tmp/nginx-logs/
+      - ./nginx-logs:/var/log/nginx:rw
       
     environment:
       - NGINX_HTTP_PORT_NUMBER=80

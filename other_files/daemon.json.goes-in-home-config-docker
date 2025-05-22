@@ -1,5 +1,0 @@
-# disable iptables for docker
-{
-	"iptables": false
-}
-
