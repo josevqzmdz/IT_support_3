@@ -4,8 +4,8 @@ USER root
 
 # install sudo
 RUN install_packages sudo && \
-    echo 'bitnami ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    usermod -aG sudo bitnami
+    echo 'root-lite (1001) ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    usermod -aG sudo root
 
 # Configure logs directory
 RUN sudo mkdir -p /tmp/nginx-logs && \
