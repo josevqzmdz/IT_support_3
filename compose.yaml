@@ -1,100 +1,94 @@
-# compose file for a wordpress 
 services:
-
-  # nginx
-  nginx:
-  env_file: .env
-  container_name: ${CONTAINER_NAME}-NGINX
-  build:
-    context: .
-    dockerfile: nginx.Dockerfile
-  restart: on-failure:3
-  ports:
-    - "8080:8080"
-  volumes:
-    # for linking wordpress and nginx
-    - wordpress:/var/www/html:ro
-    # for linking error-logs
-    - ./nginx-logs:/tmp/nginx-logs
-    # for linking access.log
-    - ./nginx-logs:/var/log/nginx:rw   
-  network:
-    - ITSupport_network
-  restart: unless-stopped
-  healthcheck:
-    test: ["CMD", "nc", "-vz", "-w1", "localhost", "8080"]
-    interval: 1s
-    timeout: 1s
-    retries: 30
-  user: "www-data:www-data "
-  
-  # wordpress
-  wordpress:
+  # Database
+  mariadb:
+    container_name: ${CONTAINER_NAME}-DATABASE
+    image: mariadb:latest
     env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+      MYSQL_USER: ${WORDPRESS_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql:rw
+    networks:
+      - ITSupport_network
+    restart: unless-stopped
+
+  # WordPress
+  wordpress:
     container_name: ${CONTAINER_NAME}-WORDPRESS
     build:
       context: .
       dockerfile: wordpress.Dockerfile
-    ports:
-    - "9000:8080"
+    env_file: .env
     environment:
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
     volumes:
       - wordpress:/var/www/html:rw
-      - wordpress:/bitnami/wordpress
-    restart: on-failure:3
-    network:
-      - ITSupport_network
-    user: "www-data:www-data "
-
-  # database
-  mariadb:
-    env_file: .env
-    container_name: ${CONTAINER_NAME}-DATABASE
-    image: mariadb:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${CONTAINER_NAME}-MARIADB
-    ports:
-      - "3306:3306"
+      # localfiles for php
+      - /etc/shadow:/etc/shadow:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+    depends_on:
+      - mariadb
     networks:
       - ITSupport_network
-    volumes:
-      - database:/var/lib/mysql
+    restart: unless-stopped
+    # user 'nginx' in the group 'www-data'
+    user: "nginx:www-data"
 
-  # phpmyadmin section
+    tty: true
+    command: tail -f /dev/null
+
+  # Nginx
+  nginx:
+    container_name: ${CONTAINER_NAME}-NGINX
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    env_file: .env
+    ports:
+      - "8080:80"
+    volumes:
+      - wordpress:/var/www/html:ro
+      - ./nginx/default.conf:/etc/nginx/default.conf:ro
+      - ./nginx/my_stream_server_block.conf:/etc/nginx/my_stream_server_block.conf:ro
+      - ./nginx/wordpress-fpm:/etc/nginx/wordpress-fpm.conf:ro
+      - ./nginx-logs:/var/log/nginx:rw
+      
+    depends_on:
+      - wordpress
+    networks:
+      - ITSupport_network
+    restart: unless-stopped
+
+    tty: true
+    command: tail -f /dev/null
+
+  # phpMyAdmin
   phpmyadmin:
-    container_name: phpmyadmin
+    container_name: ${CONTAINER_NAME}-PMA
     image: phpmyadmin/phpmyadmin
     env_file: .env
     environment:
-      PMA_HOST: database
+      PMA_HOST: mariadb
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    # remember to first create a user
-    # in localhost:8081
     ports:
-      - "8081:8080"
+      - "8081:80"
+    depends_on:
+      - mariadb
     networks:
-      - internal
-    restart: on-failure:3
-    volumes:
-      - phpmyadmin:/etc/phpmyadmin
+      - ITSupport_network
+    restart: unless-stopped
 
 volumes:
-  nginx:
-    driver: local
+  database:
   wordpress:
-    driver: local
-  mariadb:
-    driver: local
-  phpmyadmin:
-    driver: local
 
 networks:
   ITSupport_network:
     driver: bridge
-    attachable: true

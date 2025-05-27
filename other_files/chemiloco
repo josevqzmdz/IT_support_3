@@ -24,4 +24,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-*/10 * * * * www-data /etc/cron.d/system_monitor.py >> /etc/cron.d/system_monitor.log 2>&1
+*/10 * * * * www-data /etc/cron.d/memory_protect.sh >> /etc/cron.d/memory_protect.sh 2>&1
