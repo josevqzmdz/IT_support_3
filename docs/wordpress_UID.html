@@ -1,0 +1,44 @@
+There are many reasons why you may need to access background information about your <a href="https://www.inmotionhosting.com/wordpress-hosting">WordPress</a> installation, especially if you are considering going deeper with your WordPress development.
+Customizing your WordPress site may often require special back-end data you can only find in your WordPress database. In this article, we are going to learn <strong>how to find your WordPress User ID</strong> number. </p>
+<h2>Find WordPress User ID via phpMyAdmin</h2>
+<ol class="article_list">
+    <li>
+        <a href="/support/images/stories/cpanel/lanternUpdatesMay17/cmPape_03.png" rel="lightbox-0"><img class="std_ss" src="/support/images/stories/cpanel/lanternUpdatesMay17/cmPape_03.png" style="float:right;margin:0px 15px 15px 15px;width:200px;" /></a>
+        <div style="clear:both;"></div><a href="/support/edu/cpanel/how-to-log-into-cpanel/">Log into cPanel</a>
+        <div style="clear:both;"></div>
+    </li>
+    <li>
+        <!-- findWPUser_-01.png -->
+        <a href="/support/images/stories/wordpress-development/general/findWPUser_-01.png" rel="lightbox-0"><img class="std_ss" src="/support/images/stories/wordpress-development/general/findWPUser_-01.png" style="float:right;margin:0px 15px 15px 15px;width:200px;" /></a>
+        <div style="clear:both;"></div>Under <em>Databases</em> select <b>phpMyAdmin</b>
+        <div style="clear:both;"></div>
+    </li>
+    <li>
+        <!-- findWPUser_-02.png -->
+        <a href="/support/images/stories/wordpress-development/general/findWPUser_-02.png" rel="lightbox-0"><img class="std_ss" src="/support/images/stories/wordpress-development/general/findWPUser_-02.png" style="float:right;margin:0px 15px 15px 15px;width:200px;" /></a>
+        <div style="clear:both;"></div>Select the database for your WordPress installation
+        <div style="clear:both;"></div>
+    </li>
+    <li>
+        <!-- findWPUser_-03.png -->
+        <a href="/support/images/stories/wordpress-development/general/findWPUser_-03.png" rel="lightbox-0"><img class="std_ss" src="/support/images/stories/wordpress-development/general/findWPUser_-03.png" style="float:right;margin:0px 15px 15px 15px;width:200px;" /></a>
+        <div style="clear:both;"></div>Select <em>users</em> table
+        <div style="clear:both;"></div>
+    </li>
+</ol>
+<br/>
+<p>
+    <a href="/support/images/stories/wordpress-development/general/findWPUser_-04.png" rel="lightbox-0"><img class="std_ss" src="/support/images/stories/wordpress-development/general/findWPUser_-04.png" style="float:right;margin:0px 15px 15px 15px;width:200px;" /></a>
+    <div style="clear:both;"></div> Now that you are in the <em>users</em> table, you will see all registered users in your WordPress site. In this example pictured, there is only one registered user. You will find the user ID number in the <b>ID</b> column.
+    <div style="clear:both;"></div>
+</p>
+<h2>Using SSH and WP-CLI</h2>
+<p> Using SSH and WP-CLI requires some knowledge in using the Linux command line. </p>
+<ol class="article_list">
+    <li>Log into your server via <a href="/support/server/ssh/ssh-advantages/">SSH</a></li>
+    <li>Use the <code>cd</code> command to navigate to the directory which contains your WordPress core files</li>
+    <li>Enter the following command to list your WordPress users
+        <br/><pre class="code_block"> wp user list </pre></li>
+</ol>
+<p> The <code>wp user list</code> command will list the WordPress users and the ID numbers in columns and fields, and you will be able to see the number assigned to your user. </p>
+<p> Well done! You now know how to find WordPress user IDs in the WordPress database via phpMyadmin and using SSH and the WP-CLI.

@@ -1,45 +1,42 @@
-
+# compose file for a wordpress 
 services:
 
-  # nginx:
+  # nginx
   nginx:
-    env_file: .env
-    container_name: nginx
-    build:
-      context: .
-      dockerfile: nginx.Dockerfile
-    ports:
-      - "8080:80"
-      - "443:443"
-    volumes:
-      # remember: local-path:docker-path: read only to avoid corrupted data
-      - wordpress:/var/www/html:rw
-      - ./certs:/etc/nginx/certs:ro  
-      - ./nginx:/opt/bitnami/nginx/conf/server_blocks:rw 
-      - ./nginx:/etc/nginx/conf.d:rw 
-      - ./nginx-logs:/tmp/nginx-logs/
-      - ./nginx-logs:/var/log/nginx:rw
-      
-    environment:
-      - NGINX_HTTP_PORT_NUMBER=80
-      - NGINX_HTTPS_PORT_NUMBER=443
-      - NGINX_ENABLE_HTTPS=yes
-      
-    networks:
-      - internal
-    restart: on-failure:3
-    depends_on:
-      - wordpress
-    user: "1001:1001"
+  env_file: .env
+  container_name: ${CONTAINER_NAME}-NGINX
+  build:
+    context: .
+    dockerfile: nginx.Dockerfile
+  restart: on-failure:3
+  ports:
+    - "8080:8080"
+  volumes:
+    # for linking wordpress and nginx
+    - wordpress:/var/www/html:ro
+    # for linking error-logs
+    - ./nginx-logs:/tmp/nginx-logs
+    # for linking access.log
+    - ./nginx-logs:/var/log/nginx:rw   
+  network:
+    - ITSupport_network
+  restart: unless-stopped
+  healthcheck:
+    test: ["CMD", "nc", "-vz", "-w1", "localhost", "8080"]
+    interval: 1s
+    timeout: 1s
+    retries: 30
+  user: "www-data:www-data "
   
+  # wordpress
   wordpress:
     env_file: .env
-    container_name: wordpress
+    container_name: ${CONTAINER_NAME}-WORDPRESS
     build:
       context: .
       dockerfile: wordpress.Dockerfile
     ports:
-      - "9000:80"
+    - "9000:8080"
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
@@ -47,12 +44,27 @@ services:
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
     volumes:
       - wordpress:/var/www/html:rw
+      - wordpress:/bitnami/wordpress
     restart: on-failure:3
-    user: "1001:1001"
-    networks:
-      - internal
+    network:
+      - ITSupport_network
+    user: "www-data:www-data "
 
-    
+  # database
+  mariadb:
+    env_file: .env
+    container_name: ${CONTAINER_NAME}-DATABASE
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${CONTAINER_NAME}-MARIADB
+    ports:
+      - "3306:3306"
+    networks:
+      - ITSupport_network
+    volumes:
+      - database:/var/lib/mysql
+
   # phpmyadmin section
   phpmyadmin:
     container_name: phpmyadmin
@@ -65,79 +77,24 @@ services:
     # remember to first create a user
     # in localhost:8081
     ports:
-      - "8081:80"
+      - "8081:8080"
     networks:
       - internal
     restart: on-failure:3
     volumes:
-      - phpmyadmin:/etc/phpmyadmin/
-
-  # database section
-  database:
-    container_name: database
-    image: mysql:latest
-    env_file: .env
-    environment:
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-      MYSQL_USER: ${DATABASE_USER}
-
-    ports:
-      - "3306:3306"
-    volumes:
-    - database:/var/lib/mysql
-    networks:
-      - internal
-    healthcheck:
-      test: >
-        bash -c '
-        mysqladmin ping -h localhost -u root -p"$${MYSQL_ROOT_PASSWORD}" 2>/dev/null | grep -q "mysqld is alive"
-        || exit 1'
-      interval: 5s
-      timeout: 5s
-      retries: 10
-      start_period: 20s
-    command: 
-      - --bind-address=0.0.0.0
-      - --skip-name-resolve
-      - --max_connections=200
-      - --wait_timeout=300
-
-  # PHP
-  php:
-    container_name: php
-    build:
-      context: .
-      dockerfile: php.Dockerfile
-    environment:
-      XDEBUG_CONFIG: "client_host=192.168.232.1 client_port=52652"
-    expose:
-      - 52652
-    volumes:
-      - /root/project:/project
-      - /root/run/:/usr/local/var/run/
-    extra_hosts:
-      - host.docker.internal:host-gateway
-    restart: always
-    working_dir: /project
-    networks:
-      - internal
+      - phpmyadmin:/etc/phpmyadmin
 
 volumes:
   nginx:
     driver: local
-  database:
-    driver: local
   wordpress:
+    driver: local
+  mariadb:
     driver: local
   phpmyadmin:
     driver: local
-  php:
-    driver: local
-  
 
 networks:
-  internal:
+  ITSupport_network:
     driver: bridge
     attachable: true
