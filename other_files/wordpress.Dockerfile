@@ -3,10 +3,6 @@ FROM wordpress:latest
 # manage the user www-data with the same UID / GID than that of
 # the official nginx image
 
-RUN groupadd -g 101 nginx && \
-    useradd -u 101 -g nginx -M -s /bin/false nginx && \
-    usermod -a -G www-data nginx
-
 # https://docs.bitnami.com/google/apps/wordpress-pro/administration/understand-file-permissions/
 # gives the correct permissions to each directory
 RUN mkdir -p /var/www/html/wp-content && \

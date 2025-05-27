@@ -1,7 +1,7 @@
 FROM nginx:stable-alpine
 
 # run as root
-USER root
+#USER root
 
 # creates "welcome to nginx!" helloworld
 #COPY ./index.html /user/share/nginx/html/index.html
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/nginx-logs && \
 COPY ./nginx/ /etc/nginx/conf.d
 
 # change to non-root
-USER nginx
+# USER nginx
 
 # expose port 80
 EXPOSE 8080 
