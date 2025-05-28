@@ -1,9 +1,4 @@
-Salut! My name is Jose Miguel Vazquez Mendez, and this wordpress project, running on nginx, mysql, phpmyadmin and php, is the test given to me for admission for a IT support job in france. If you, the recruiter, are reading this, then you can acquire a copy of my CV (both in english and french) in the /docs/ folder! The answers to the questionnaire were sent to my recruiter's email. I also have a document where I explain, step by step, how I created the project.
-
-Anyways, I leave my contact here just so its easier to reach out in case I do make it to the next part of the interview:
-
-email: jose.vqz.mdz@gmail.com
-phone: +523541090470
+Salut! My name is Jose Miguel Vazquez Mendez, and this wordpress project, running on nginx, mysql, phpmyadmin and php, to demonstrate how to run a simple wordpress docker build with good practices, that are to be expected in production builds.
 
 Anyways, with that out of the way, the assesment requires me to write a README explaining:
 
